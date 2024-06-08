@@ -87,11 +87,11 @@ export class DashboardComponent {
 
   getStatusSeverity(status: string) {
     switch (status) {
-      case 'PENDING':
+      case 'PENDIENTE':
         return 'warning';
-      case 'DELIVERED':
+      case 'ENTREGADO':
         return 'success';
-      case 'CANCELLED':
+      case 'CANCELADA':
         return 'danger';
       default:
         return undefined;

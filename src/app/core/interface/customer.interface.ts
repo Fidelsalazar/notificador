@@ -2,14 +2,12 @@ import { Order } from "./order.interface";
 
 export interface Customer {
   id: string;
-  code: string;
   name: string;
-  description: string;
   image: string;
-  price: number;
+  sex: string;
   category: string;
-  quantity: number;
-  inventoryStatus: string;
-  rating: number;
+  tt: string;
+  tedu: string;
+  tcnea: string;
   orders: Order[];
 }

@@ -40,51 +40,23 @@ export class CustomerService {
     return new Promise((resolve) => {
       resolve([
         {
-          id: '1001',
-          code: 'b230fh0g4',
-          name: 'Elegant Watch',
-          description: 'Elegant Watch Description',
+          id: '007',
+          name: 'Kenia Cababello Bordeloy',
           image: 'elegant-watch.jpg',
-          price: 120,
-          category: 'Accessories',
-          quantity: 15,
-          inventoryStatus: 'INSTOCK',
-          rating: 4,
+          sex: 'F',
+          tt: 21,
+          tedu: 21,
+          tcnea: 21,
           orders: [
             {
-              id: '1001-0',
-              productCode: 'b230fh0g4',
-              date: '2020-10-14',
-              amount: 120,
-              quantity: 2,
-              customer: 'Maria Anders',
-              status: 'DELIVERED',
+              date: '2020-09-24',
+              resolution: '',
+              amount: '',
+              quantity: 'Sindicato Nacional de Trabajadores de la Educacion',
+              customer: 'Distincion Rafael Maria de Mendive ',
+              status: 'PROPUESTA',
             },
-            // ... más órdenes ...
-          ],
-        },
-        {
-          id: '1002',
-          code: 'c330gh0h5',
-          name: 'Classic Watch',
-          description: 'Classic Watch Description',
-          image: 'classic-watch.jpg',
-          price: 75,
-          category: 'Accessories',
-          quantity: 30,
-          inventoryStatus: 'LOWSTOCK',
-          rating: 3,
-          orders: [
-            {
-              id: '1002-0',
-              productCode: 'c330gh0h5',
-              date: '2020-11-15',
-              amount: 75,
-              quantity: 1,
-              customer: 'Steve Wozniak',
-              status: 'RETURNED',
-            },
-            // ... más órdenes ...
+
           ],
         },
       ]);

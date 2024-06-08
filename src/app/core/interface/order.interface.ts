@@ -1,9 +1,7 @@
 export interface Order {
-  id: string;
-  productCode: string;
   date: string;
-  amount: number;
-  quantity: number;
+  amount: string;
+  quantity: string;
   customer: string;
   status: string;
 }
