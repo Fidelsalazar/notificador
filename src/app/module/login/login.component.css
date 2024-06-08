@@ -1,0 +1,39 @@
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: var(--font-family);
+  font-weight: normal;
+  background: var(--surface-ground);
+  color: var(--text-color);
+  padding: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.continer{
+  position: center;
+  width: 800px;
+  margin-left: 20%;
+}
+
+.container{
+  display: flex;
+  flex-direction: row;
+  padding: 10%;
+}
+
+.card {
+  position: relative;
+  background: var(--surface-card);
+  margin-left: 20%;
+  margin-top: 40%;
+  border: 2px solid rgb(153, 152, 152);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+sign-in{
+ margin-left: 40px;
+}
