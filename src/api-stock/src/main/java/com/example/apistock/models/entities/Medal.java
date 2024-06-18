@@ -6,29 +6,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "orders")
-public class Order {
+@Table
+public class Medal {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String productCode;
-  private Date date;
-  private double amount;
-  private int quantity;
-  private String customer;
-  private String status;
+  private String Name;
+  private Integer timeWork;
+
+  @ManyToMany
+  private List<Employee> employee;
 
   @ManyToOne
-  @JoinColumn(name = "employee_id")
-  private Employee employee;
-
-  // Getters and setters...
+  private Institucion institucion;
 }

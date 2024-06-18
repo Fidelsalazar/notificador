@@ -1,16 +1,30 @@
-<div class="continer" *ngIf="!authService.isLoggedIn()">
+<div
+  class="continer "
+  *ngIf="authService.isLoggedIn()"
+>
+  <div class="continer-raw">
   <div class="card flex justify-content-center ">
-    <div class="container">
       <form class="container" [formGroup]="loginForm">
         <div class="left w-full md:w-5 flex flex-col items-center justify-center gap-3 py-5">
           <div class="flex flex-wrap justify-center items-center gap-2">
-            <label for="username" class="w-6rem">Usuario</label>
-            <input pInputText id="username" formControlName="username" class="w-12rem" />
+            <br/>
+            <input
+              pInputText id="username"
+              formControlName="username"
+              class="w-12rem"
+              placeholder="Usuario"
+            />
           </div>
           <br/>
+          <br/>
           <div class="flex flex-wrap justify-center items-center gap-2">
-            <label for="password" class="w-6rem">Contraseña</label>
-            <input pInputText id="password" formControlName="password" class="w-12rem" />
+            <input
+              pInputText
+              id="password"
+              formControlName="password"
+              class="w-12rem"
+              placeholder="Contraseña"
+            />
           </div>
           <br/>
           <p-button
@@ -44,7 +58,8 @@
 
 
     </div>
+
   </div>
 </div>
 
-
+<div class="background-image"></div>

@@ -11,30 +11,32 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "employees")
+@Table
 public class Employee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long idEmpleado;
+  private Long id;
 
+  private Long idEmpleado;
   private String noCI;
   private String nombre;
   private String apellido1;
   private String apellido2;
-  private boolean cuadroDisponibleGuardia;
-  private int tiempoTrabajo;
-  private int tiempoTrabajoEdu;
-  private int tiempoTrabajoCNEA;
-  private int year2022;
-  private int year2023;
+  private boolean cuadro;
+  private Date fechaEntrada;
+  private int fechaEntradEdu;
+  private int fechaEntradaCNEA;
   private Date fechaSolicitud;
   private boolean otorgada;
   private String numeroResolucion;
 
+  @ManyToMany
+  private List<Medal> order;
 }

@@ -9,13 +9,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-
   private loggedIn = new BehaviorSubject<boolean>(false);
 
-  constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string) {
     console.log(`${environment.apiUrl}/auth/login`);
@@ -29,20 +25,20 @@ export class AuthService {
       );
   }
 
-  register(username: string, password: string): Observable <any> {
+  register(username: string, password: string): Observable<any> {
     const user = { username, password };
     return this.http.post(`${environment.apiUrl}/auth/register`, user);
   }
 
   isLoggedIn() {
-    console.log(this.loggedIn)
+    console.log(this.loggedIn);
     return this.loggedIn.asObservable();
   }
 
   logout() {
     // Lógica de cierre de sesión
     this.setLoggedIn(false);
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 
   setLoggedIn(value: boolean) {
