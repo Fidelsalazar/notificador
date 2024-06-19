@@ -45,40 +45,75 @@ export class NavbarComponent {
         icon: 'pi pi-search',
         items: [
           {
-            label: 'Core',
-            icon: 'pi pi-bolt',
-            shortcut: '⌘+S',
+            label: 'Consejo de Estado',
+            //icon: 'pi pi-bolt',
+            shortcut: '(CE)',
+            items: [
+              {
+                label: 'Medalla José Tey',
+                shortcut: '(25 años)',
+                routerLink: '/medals'
+              },
+              {
+                label: 'Orden Carlos J Finlay',
+                shortcut: '(30 años)',
+              },
+              {
+                label: 'Orden Frank País García',
+                shortcut: '(30 años)',
+              },
+              {
+                label: 'Carlos J Finlay',
+              },
+              {
+                label: 'Orden Hazaña Laboral',
+              },
+              {
+                label: 'Medalla Lázarp Peña de 3er Grado',
+              },
+              {
+                label: 'Medalla Jesús Menéndez',
+              },
+            ],
           },
           {
-            label: 'Blocks',
-            icon: 'pi pi-server',
-            shortcut: '⌘+B',
+            label: 'Ministerio de Educación Superior',
+            shortcut: '(MES)',
+            items: [
+              {
+                label: 'Medalla de la Edicación Cubana',
+                shortcut: '(20 años)',
+              },
+              {
+                label: ' Distincion Juan Tomás Roy',
+                shortcut: '',
+              },
+            ],
           },
           {
-            label: 'UI Kit',
-            icon: 'pi pi-pencil',
-            shortcut: '⌘+U',
+            label:
+              'Sindicato Nacional de trabajadores de la Educación, la Ciencia y el Deporte',
+            shortcut: '',
+            items: [
+              {
+                label: 'Medalla Rafael María de Mendive',
+                shortcut: '(20 años y 25 años)',
+              },
+            ],
           },
           {
             separator: true,
           },
-          {
-            label: 'Templates',
-            icon: 'pi pi-palette',
-            items: [
-              {
-                label: 'Apollo',
-                icon: 'pi pi-palette',
-                badge: '2',
-              },
-              {
-                label: 'Ultima',
-                icon: 'pi pi-palette',
-                badge: '3',
-              },
-            ],
-          },
         ],
+      },
+      {
+        label: 'Planificación de guardia obrera',
+        icon: 'pi pi-shield',
+      },
+      {
+        label: 'Trabajadores',
+        icon: 'pi pi-users',
+        routerLink: '/employer'
       },
       {
         separator: true,
@@ -86,7 +121,7 @@ export class NavbarComponent {
       {
         label: 'Salir',
         icon: 'pi pi-fw pi-power-off',
-        command: () => this.close()
+        command: () => this.close(),
       },
     ];
   }

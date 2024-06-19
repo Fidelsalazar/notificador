@@ -41,7 +41,7 @@ export class CustomerService {
       resolve([
         {
           id: '007',
-          name: 'Kenia Cababello Bordeloy',
+          name: 'BIRDOLOY CABALLERO KENIA',
           image: 'elegant-watch.jpg',
           sex: 'F',
           tt: 21,
@@ -56,9 +56,66 @@ export class CustomerService {
               customer: 'Distincion Rafael Maria de Mendive ',
               status: 'PROPUESTA',
             },
-
           ],
         },
+        {
+          id: '011',
+          name: 'MELEK CAMPOS SOFIA',
+          image: 'elegant-watch.jpg',
+          sex: 'F',
+          tt: 27,
+          tedu: 27,
+          tcnea: 27,
+          orders: [
+            {
+              date: '',
+              resolution: '',
+              amount: '2014',
+              quantity: '',
+              customer: 'Medalla Jesús Menendez',
+              status: 'ENTREGADA',
+            },
+          ],
+        },
+        {
+          id: '028',
+          name: 'MARIO HECHAVARRIA SANCHEZ',
+          image: 'elegant-watch.jpg',
+          sex: 'M',
+          tt: 38,
+          tedu: 13,
+          tcnea: 13,
+          orders: [
+            {
+              date: '6-19-2024',
+              resolution: '',
+              amount: '',
+              quantity: '',
+              customer: 'Medalla Lazaro Peña de 3er Grado',
+              status: 'SOLICITADA',
+            },
+          ],
+        },
+        {
+          id: '003',
+          name: 'MONICA ROSARIO BERENGUER UNGARO',
+          image: 'elegant-watch.jpg',
+          sex: 'F',
+          tt: 28,
+          tedu: 28,
+          tcnea: 28,
+          orders: [
+            {
+              date: '',
+              resolution: '',
+              amount: '',
+              quantity: '',
+              customer: '',
+              status: '',
+            },
+          ],
+        },
+        // ... (y así sucesivamente para cada entrada)
       ]);
     });
   }

@@ -1,79 +1,11 @@
 <div *ngIf="authService.isLoggedIn()">
   <app-navbar></app-navbar>
-  <div class="card">
-    <p-toast />
-    <p-table [value]="products" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
-        <ng-template pTemplate="caption">
-            <div class="flex flex-wrap justify-content-end gap-2">
-                <p-button label="Expand All" icon="pi pi-plus" text (onClick)="expandAll()" />
-                <p-button label="Collapse All" icon="pi pi-minus" text (onClick)="collapseAll()" />
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width: 5rem"></th>
-                <th pSortableColumn="id">Id <p-sortIcon field="price" /></th>
-                <th pSortableColumn="name">Nombre <p-sortIcon field="name" /></th>
-                <th>Foto</th>
-                <th pSortableColumn="price">Sexo <p-sortIcon field="price" /></th>
-                <th pSortableColumn="rating">Tiempo de trabajo <p-sortIcon field="rating" /></th>
-                <th pSortableColumn="inventoryStatus">Tiempo de trabajo en EDU <p-sortIcon field="inventoryStatus" /></th>
-                <th pSortableColumn="inventoryStatus">Tiempo de trabajo en el CENEA <p-sortIcon field="inventoryStatus" /></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-product let-expanded="expanded">
-            <tr>
-                <td>
-                    <p-button type="button" pRipple [pRowToggler]="product" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
-                </td>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td><img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" width="50" class="shadow-4" /></td>
-                <td>{{ product.sex}}</td>
-                <td>{{ product.tt}}</td>
-                <td>{{product.tedu}}</td>
-                <td>{{product.tcnea}}</td>
-
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="rowexpansion" let-product>
-            <tr>
-                <td colspan="7" class="">
-                    <div class="p-3 conde ">
-                        <p-table [value]="product.orders" dataKey="id">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th pSortableColumn="customer">Medalla <p-sortIcon field="customer" /></th>
-                                    <th pSortableColumn="customer">Entrega <p-sortIcon field="customer" /></th>
-                                    <th pSortableColumn="date">Fecha de solicitud <p-sortIcon field="date" /></th>
-                                    <th pSortableColumn="amount">Fecha de entregado<p-sortIcon field="amount" /></th>
-                                    <th pSortableColumn="amount"># Resolución<p-sortIcon field="amount" /></th>
-                                    <th pSortableColumn="status">Estado <p-sortIcon field="status" /></th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-order class="conde">
-                                <tr>
-                                    <td>{{ order.customer }}</td>
-                                    <td>{{ order.quantity}}</td>
-                                    <td>{{ order.date }}</td>
-                                    <td>{{ order.amount }}</td>
-                                    <td>{{ order. resolution }}</td>
-                                    <td>
-                                        <p-tag [value]="order.status" [severity]="getStatusSeverity(order.status)" />
-                                    </td>
-
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="emptymessage">
-                                <tr>
-                                    <td colspan="6">There are no order for this product yet.</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+  <div class="content">
+    <i class="pi pi-check-circle" aria-hidden="true"></i>
+    <br/>
+    <h1>Bienvenido Usiario</h1>
+    <h2>Sistema de Control y entrega de Condecoracione</h2>
+    <br/>
+    <h3>CENEA</h3>
   </div>
 </div>

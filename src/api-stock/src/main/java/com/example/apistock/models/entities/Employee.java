@@ -31,12 +31,16 @@ public class Employee {
   private String apellido2;
   private boolean cuadro;
   private Date fechaEntrada;
-  private int fechaEntradEdu;
-  private int fechaEntradaCNEA;
-  private Date fechaSolicitud;
-  private boolean otorgada;
-  private String numeroResolucion;
+  private Date fechaEntradEdu;
+  private Date fechaEntradaCNEA;
+
 
   @ManyToMany
-  private List<Medal> order;
+  @JoinTable(
+    name = "employee_medal",
+    joinColumns = @JoinColumn(name = "medal_id"),
+    inverseJoinColumns = @JoinColumn(name = "employee_id")
+  )
+  private List<Employee> employees;
+
 }

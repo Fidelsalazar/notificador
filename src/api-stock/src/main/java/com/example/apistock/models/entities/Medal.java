@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -21,9 +22,16 @@ public class Medal {
 
   private String Name;
   private Integer timeWork;
+  private Date fechaSolicitud;
 
   @ManyToMany
-  private List<Employee> employee;
+  @JoinTable(
+    name = "employee_medal",
+    joinColumns = @JoinColumn(name = "medal_id"),
+    inverseJoinColumns = @JoinColumn(name = "employee_id")
+  )
+  private List<Employee> employees;
+
 
   @ManyToOne
   private Institucion institucion;

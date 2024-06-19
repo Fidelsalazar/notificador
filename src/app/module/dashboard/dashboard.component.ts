@@ -23,96 +23,13 @@ import { ToastModule } from 'primeng/toast';
   standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
-  imports: [
-    CommonModule,
-    NavbarComponent,
-    TableModule,
-    TagModule,
-    IconFieldModule,
-    InputTextModule,
-    InputIconModule,
-    MultiSelectModule,
-    DropdownModule,
-    HttpClientModule,
-    FormsModule,
-    TagModule,
-    RatingModule,
-    ButtonModule,
-    ToastModule,
-  ],
+  imports: [HttpClientModule, CommonModule, NavbarComponent, DropdownModule],
   providers: [AuthService, MessageService, CustomerService],
 })
 export class DashboardComponent {
-  products!: Customer[];
-  expandedRows = {};
-
   constructor(
     public authService: AuthService,
     private customerService: CustomerService,
     private messageService: MessageService
   ) {}
-
-  ngOnInit() {
-    this.customerService
-      .getCustomersLarge()
-      .then((data) => (this.products = data));
-  }
-
-  expandAll(): void {
-    this.expandedRows = this.products.reduce(
-      (acc: { [key: string]: boolean }, p) => {
-        acc[p.id] = true;
-        return acc;
-      },
-      {} as { [key: string]: boolean }
-    );
-  }
-
-  collapseAll() {
-    this.expandedRows = {};
-  }
-
-  getSeverity(status: string) {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warning';
-      case 'OUTOFSTOCK':
-        return 'danger';
-      default:
-        return undefined;
-    }
-  }
-
-  getStatusSeverity(status: string) {
-    switch (status) {
-      case 'PENDIENTE':
-        return 'warning';
-      case 'ENTREGADO':
-        return 'success';
-      case 'CANCELADA':
-        return 'danger';
-      default:
-        return undefined;
-    }
-  }
-
-  onRowExpand(event: TableRowExpandEvent) {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'Product Expanded',
-      detail: event.data.name,
-      life: 3000,
-    });
-  }
-
-  onRowCollapse(event: TableRowCollapseEvent) {
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Product Collapsed',
-      detail: event.data.name,
-      life: 3000,
-    });
-  }
 }
