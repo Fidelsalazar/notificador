@@ -24,23 +24,33 @@ public class Employee {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column
   private Long idEmpleado;
+  @Column
   private String noCI;
+  @Column
   private String nombre;
+  @Column
   private String apellido1;
+  @Column
   private String apellido2;
-  private boolean cuadro;
+  @Column
+  private String cuadro;
+  @Column
+  private String sexo;
+  @Column
   private Date fechaEntrada;
+  @Column
   private Date fechaEntradEdu;
+  @Column
   private Date fechaEntradaCNEA;
 
-
-  @ManyToMany
+  /*@ManyToMany
   @JoinTable(
     name = "employee_medal",
     joinColumns = @JoinColumn(name = "medal_id"),
     inverseJoinColumns = @JoinColumn(name = "employee_id")
   )
-  private List<Employee> employees;
+  private List<Medal> medals;*/
 
 }

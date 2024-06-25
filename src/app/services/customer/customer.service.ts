@@ -1,15 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
+import { environment } from '../../config';
+import { Customer } from '../../core/interface/customer.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomerService {
+  public modificacionExitosaSubject = new BehaviorSubject<boolean>(false);
 
   customers: any[] = [
     // ... lista de clientes ...
   ];
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   filterGlobal(value: string, matchMode: string): void {
     if (!value || !matchMode) {
@@ -33,8 +38,45 @@ export class CustomerService {
     });
   }
 
+  create(data: any): Observable<any> {
+    return this.http
+      .post<any>(`${environment.apiUrl}/employee`, data)
+      .pipe(catchError(this.handleError));
+  }
 
+  delete(id: any): Observable<string> {
+    return this.http.delete<string>(
+      `${environment.apiUrl}/employee/delete/${id}`
+    );
+  }
 
+  modified(data: any): Observable<any> {
+    const form = {
+      name: data.name,
+      sex: data.sex,
+      category: data.categpry,
+      tt: data.tt,
+      tedu: data.tedu,
+      tcnea: data.tcnea,
+      orders: data.orders,
+    };
+
+    return this.http
+      .patch<any>(`${environment.apiUrl}/employee/${data.id}`, form)
+      .pipe(catchError(this.handleError));
+  }
+
+  getAllCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(`${environment.apiUrl}/employee/all`).pipe(
+      tap((data) => {
+        console.log('Datos recibidos:', data);
+      }),
+      catchError((error) => {
+        console.error('Error fetching data:', error);
+        return throwError('Error al obtener los centros');
+      })
+    );
+  }
 
   getCustomersLarge(): Promise<any> {
     return new Promise((resolve) => {
@@ -53,7 +95,7 @@ export class CustomerService {
               resolution: '',
               amount: '',
               quantity: 'Sindicato Nacional de Trabajadores de la Educacion',
-              customer: 'Distincion Rafael Maria de Mendive ',
+              customer: 'Distinción Rafael Maria de Mendive ',
               status: 'PROPUESTA',
             },
           ],
@@ -118,5 +160,28 @@ export class CustomerService {
         // ... (y así sucesivamente para cada entrada)
       ]);
     });
+  }
+
+  private handleError(error: any) {
+    if (error.error instanceof ErrorEvent) {
+      // Error del cliente, como una red inalcanzable
+      console.error('Ocurrió un error:', error.error.message);
+    } else {
+      // Error del servidor
+      console.error(
+        `Código de error ${error.status}, ` + `body: ${error.error}`
+      );
+    }
+    // Retorna un observable con un mensaje de error legible
+    return throwError(
+      'Ocurrió un error, por favor intenta nuevamente más tarde.'
+    );
+  }
+  getModificacionExitosaSubject(): Observable<boolean> {
+    return this.modificacionExitosaSubject.asObservable();
+  }
+
+  setModificacionExitosa(modificacionExitosa: boolean): void {
+    this.modificacionExitosaSubject.next(modificacionExitosa);
   }
 }

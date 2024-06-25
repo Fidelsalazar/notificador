@@ -17,6 +17,8 @@ import { AuthService } from '../../services/auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { CustomerService } from '../../services/customer/customer.service';
 import { Customer } from '../../core/interface/customer.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { EditDialogComponent } from '../../components/edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-employee',
@@ -43,19 +45,65 @@ import { Customer } from '../../core/interface/customer.interface';
   providers: [AuthService, MessageService, CustomerService],
 })
 export class EmployeeComponent {
+  customers: any[] = [];
   products!: Customer[];
   expandedRows = {};
 
   constructor(
     public authService: AuthService,
     private customerService: CustomerService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit() {
-    this.customerService
+    this.getEmployee();
+    /*this.customerService
       .getCustomersLarge()
-      .then((data) => (this.products = data));
+      .then((data) => (this.products = data));*/
+  }
+
+  openDialog(data: any, template: string, action: string): void {
+    console.log(' Editar empleado', data, template);
+
+    let content: any;
+
+    if (template === 'Empleado') {
+      switch (action) {
+        case 'edit':
+          content = 'editEmployee';
+          break;
+        case 'new':
+          content = 'newEmployee';
+          break;
+      }
+    }
+
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      width: '800px',
+      height: '500px',
+      data: {
+        use: template,
+        search: content,
+        data: data,
+      },
+    });
+
+    dialogRef.componentInstance.modificationSuccess.subscribe(() => {
+      this.getEmployee();
+    });
+  }
+
+  getEmployee(): void {
+    this.customerService.getAllCustomers().subscribe({
+      next: (response) => {
+        this.customers = response;
+        console.log('Recibido en componente Employee', response);
+      },
+      error: (error) => {
+        console.log('Error obteniendo datos', error);
+      },
+    });
   }
 
   expandAll(): void {
@@ -101,7 +149,7 @@ export class EmployeeComponent {
   onRowExpand(event: TableRowExpandEvent) {
     this.messageService.add({
       severity: 'info',
-      summary: 'Product Expanded',
+      summary: 'Datos del empleado expandidos',
       detail: event.data.name,
       life: 3000,
     });
@@ -110,9 +158,22 @@ export class EmployeeComponent {
   onRowCollapse(event: TableRowCollapseEvent) {
     this.messageService.add({
       severity: 'success',
-      summary: 'Product Collapsed',
+      summary: 'Datos del empleado colapsados',
       detail: event.data.name,
       life: 3000,
+    });
+  }
+
+  deleteAire(id: any): void {
+    console.log(id.id);
+    this.customerService.delete(id.id).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.getEmployee();
+      },
+      error: (error) => {
+        console.error('Error fetching data:', error);
+      },
     });
   }
 }

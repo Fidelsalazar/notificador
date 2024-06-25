@@ -20,8 +20,11 @@ public class Medal {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column
   private String Name;
+  @Column
   private Integer timeWork;
+  @Column
   private Date fechaSolicitud;
 
   @ManyToMany

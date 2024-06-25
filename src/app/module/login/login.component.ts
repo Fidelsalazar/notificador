@@ -27,6 +27,7 @@ import { Subscription } from 'rxjs';
     PasswordModule,
     HttpClientModule,
     CommonModule,
+    ReactiveFormsModule,
   ],
   providers: [AuthService],
   templateUrl: './login.component.html',
@@ -46,7 +47,7 @@ export class LoginComponent {
     private cdr: ChangeDetectorRef
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(3)]],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }

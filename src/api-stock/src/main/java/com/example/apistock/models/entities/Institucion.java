@@ -17,5 +17,6 @@ public class Institucion {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @Column
   private String name;
 }
