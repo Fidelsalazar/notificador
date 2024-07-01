@@ -2,6 +2,7 @@ package com.example.apistock.services.scheduled;
 
 import com.example.apistock.models.entities.Employee;
 import com.example.apistock.models.entities.EmployeeMedal;
+import com.example.apistock.models.entities.EmployeeMedalId;
 import com.example.apistock.models.entities.Medal;
 import com.example.apistock.repositories.EmployeeMedalRepository;
 import com.example.apistock.repositories.EmployeeRepository;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Date;
 
 @Slf4j
 @Component
@@ -35,6 +37,7 @@ public class ScheduledTask implements ScheduledTaskInterface{
 
     List < Employee > employeeList = employeeRepository.findAll();
     LocalDate actualDate = LocalDate.now();
+    Date fechaSolicitud = java.sql.Date.valueOf(actualDate);
 
     log.info("Iniciando la revisión de empleados para la asignación de medallas.");
 
@@ -57,10 +60,18 @@ public class ScheduledTask implements ScheduledTaskInterface{
         // Crear y guardar la asociación en la tabla employee_medal
         EmployeeMedal employeeMedal = new EmployeeMedal();
 
+        // Crear una nueva instancia de EmployeeMedalId
+        EmployeeMedalId id = new EmployeeMedalId();
+        id.setEmployeeId(employee.getId());
+        id.setMedalId(medal.getId());
+
+        // Asignar la instancia de EmployeeMedalId a la entidad EmployeeMedal
+        employeeMedal.setId(id);
         employeeMedal.setEmployee(employee);
         employeeMedal.setMedal(medal);
-        employeeMedal.setStatus("Pendiente");
+        employeeMedal.setStatus("PROPUESTA");
         employeeMedal.setFechaEntrega(null);
+        employeeMedal.setFechaSolicitud(fechaSolicitud);
 
         employeeMedalRepository.save(employeeMedal);
         log.info("Medalla " + medal.getName() + " asignada al empleado ID: " + employee.getId());

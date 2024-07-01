@@ -45,12 +45,25 @@ public class Employee {
   @Column
   private Date fechaEntradaCNEA;
 
-  /*@ManyToMany
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
-    name = "employee_medal",
-    joinColumns = @JoinColumn(name = "medal_id"),
-    inverseJoinColumns = @JoinColumn(name = "employee_id")
+    name = "employee_medal", // Nombre de la tabla de unión
+    joinColumns = @JoinColumn(name = "employee_id"), // Columna de esta entidad (Employee)
+    inverseJoinColumns = @JoinColumn(name = "medal_id") // Columna de la entidad asociada (Medal)
   )
-  private List<Medal> medals;*/
+  private List<Medal> medals;
 
+  @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+  private List<EmployeeMedal> employeeMedals;
+
+  @Override
+  public String toString() {
+    return "Employee{" +
+      "id=" + id +
+      ", nombre='" + nombre + '\'' +
+      ", apellido1='" + apellido1 + '\'' +
+      // ... otros campos ...
+      ", medals=" + (medals != null ? "Loaded Medals" : "No Medals") +
+      '}';
+  }
 }

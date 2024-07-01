@@ -21,11 +21,10 @@ public class Medal {
   private Long id;
 
   @Column
-  private String Name;
+  private String name;
   @Column
   private Integer timeWork;
-  @Column
-  private Date fechaSolicitud;
+
 
   @ManyToMany
   @JoinTable(
@@ -34,7 +33,6 @@ public class Medal {
     inverseJoinColumns = @JoinColumn(name = "employee_id")
   )
   private List<Employee> employees;
-
 
   @ManyToOne
   private Institucion institucion;

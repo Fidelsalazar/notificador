@@ -45,6 +45,7 @@ import { EditDialogComponent } from '../../components/edit-dialog/edit-dialog.co
   providers: [AuthService, MessageService, CustomerService],
 })
 export class EmployeeComponent {
+
   customers: any[] = [];
   products!: Customer[];
   expandedRows = {};
@@ -81,7 +82,7 @@ export class EmployeeComponent {
 
     const dialogRef = this.dialog.open(EditDialogComponent, {
       width: '800px',
-      height: '500px',
+      height: '60%',
       data: {
         use: template,
         search: content,

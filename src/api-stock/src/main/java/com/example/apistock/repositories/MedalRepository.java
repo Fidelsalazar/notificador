@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface MedalRepository extends JpaRepository<Medal, Long> {
   List<Medal> findByTimeWork( Long aniosWorked);
+
+  Medal findByName( String name);
 }

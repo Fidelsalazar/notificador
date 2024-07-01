@@ -1,4 +1,13 @@
 <app-navbar></app-navbar>
+
+<br>
+
+<div>
+  <h3>
+    {{menuItemLabel}}
+  </h3>
+</div>
+
 <div class="mb-3">
     <p-button
         type="button"
@@ -9,7 +18,7 @@
     <p-button
         type="button"
         icon="pi pi-refresh"
-        (click)="reset()"
+        (onClick)="reset()"
         styleClass="p-button-text" />
     <p-button
         type="button"
@@ -32,10 +41,11 @@
     >
         <ng-template pTemplate="header">
             <tr>
-                <th style="width:25%">Name</th>
-                <th style="width:25%">Country</th>
-                <th style="width:25%">Company</th>
-                <th style="width:25%">Representative</th>
+                <th style="width:25%">ID</th>
+                <th style="width:25%">Nombre</th>
+                <th style="width:25%">Institución</th>
+                <th style="width:25%">Tiempo de trabajo</th>
+
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-customer>
@@ -46,8 +56,18 @@
                 <td>{{ customer.representative.name }}</td>
             </tr>
         </ng-template>
+        <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">Esta medalla no ha sido asignada a ningun empleado</td>
+                                </tr>
+                            </ng-template>
         <ng-template pTemplate="paginatorleft">
-            <p-button type="button" icon="pi pi-plus" styleClass="p-button-text" />
+            <p-button
+              type="button"
+              icon="pi pi-plus"
+              styleClass="p-button-text"
+              (onClick)="newMedal('create', 'Medalla', 'new')"
+            />
         </ng-template>
         <ng-template pTemplate="paginatorright">
             <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" />

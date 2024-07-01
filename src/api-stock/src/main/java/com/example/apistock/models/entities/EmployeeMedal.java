@@ -35,5 +35,8 @@ public class EmployeeMedal {
 
   @Column
   private Date fechaEntrega;
+
+  @Column
+  private Date fechaSolicitud;
 }
 

@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../config';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +11,9 @@ export class MedalsService {
     // ... lista de clientes ...
   ];
 
-  constructor() {}
+  constructor(
+    private httpClient : HttpClient
+  ) {}
 
   filterGlobal(value: string, matchMode: string): void {
     if (!value || !matchMode) {
@@ -32,11 +37,19 @@ export class MedalsService {
     });
   }
 
-  getCustomersLarge(): Promise<any> {
-    return new Promise((resolve) => {
-      resolve([
-
-      ]);
-    });
+  getCustomersLarge( medal : string ): Promise<any> {
+    return firstValueFrom(
+      this.httpClient.get(
+        `${environment.apiUrl}/medals/getbyname/${medal}`
+      )
+    );
   }
+
+
+
+  /*getCustomersLarge(): Promise<any> {
+    return new Promise((resolve) => {
+      resolve([]);
+    });
+  }*/
 }

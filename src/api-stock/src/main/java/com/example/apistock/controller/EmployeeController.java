@@ -9,16 +9,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @Slf4j
 @RequestMapping("v1/api/employee")
-public class EmployeeCotnroller {
+public class EmployeeController {
 
   private final EmployeeService employeeService;
 
-  public EmployeeCotnroller(EmployeeService employeeService) {
+  public EmployeeController(EmployeeService employeeService) {
     this.employeeService = employeeService;
   }
 
@@ -34,7 +33,7 @@ public class EmployeeCotnroller {
   }
 
   @GetMapping("/all")
-  public ResponseEntity<List<Employee>> getAllAireVentana() throws  Exception {
+  public ResponseEntity<List<EmployeeDTO>> getAllAireVentana() throws  Exception {
     return new ResponseEntity<>(
       employeeService.getAll(),
       HttpStatus.OK

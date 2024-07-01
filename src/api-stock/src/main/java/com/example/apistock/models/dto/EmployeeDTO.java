@@ -28,11 +28,5 @@ public class EmployeeDTO {
   private Date fechaEntradEdu;
   private Date fechaEntradaCNEA;
 
-  //private List <MedalDTO> medals;
-
-  //public List<Long> getMedalsIds() {
-   // return medals.stream().map(MedalDTO::getId).collect(Collectors.toList());
- // }
-
-
+  private List <MedalDTO> medals;
 }

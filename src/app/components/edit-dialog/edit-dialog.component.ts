@@ -66,7 +66,7 @@ export class EditDialogComponent implements OnInit {
 
   use: string;
   template: string;
-  center: any;
+  dataResive: any;
   selectedNodes: any;
 
   employeeForm: FormGroup = new FormGroup({});
@@ -79,6 +79,9 @@ export class EditDialogComponent implements OnInit {
   @ViewChild('newEmployee', { static: true })
   newEmployeeContenidoTemplate!: TemplateRef<any>;
 
+  @ViewChild('newMedal', { static: true })
+  newMedalContenidoTemplate!: TemplateRef<any>;
+
   constructor(
     private customerService: CustomerService,
     private fb: FormBuilder,
@@ -87,26 +90,18 @@ export class EditDialogComponent implements OnInit {
   ) {
     this.use = data.use;
     this.template = data.search;
-    this.center = data.data;
-
-    this.customerService.getAllCustomers().subscribe({
-      next: (response: any[]) => {
-        console.log('Lista de centros', response);
-        this.nodes = response.map((center) => ({
-          label: center.center,
-          data: {
-            sitio: center.sitio,
-            id: center.id,
-          },
-        }));
-      },
-    });
+    this.dataResive = data.data;
   }
 
   ngOnInit(): void {
-    console.log('Edit component', this.use, this.template, this.center);
+    console.log('Componente Editar');
+    console.log(this.use, this.template, this.dataResive);
+
     if (this.template === 'newEmployee') {
       this.container.createEmbeddedView(this.newEmployeeContenidoTemplate);
+      this.initFormEmployee();
+    } else if (this.template === 'newMedal') {
+      this.container.createEmbeddedView(this.newMedalContenidoTemplate);
       this.initFormEmployee();
     }
 
@@ -138,24 +133,42 @@ export class EditDialogComponent implements OnInit {
       nombre: [''],
       apellido1: [''],
       apellido2: [''],
-      cuadro: 'false',
-      sexo: '',
+      cuadro: [''],
+      sexo: [''],
     });
+  }
+
+  onCuadroChange(event: Event) {
+    const value = (event.target as HTMLInputElement).checked ? 'true' : 'false';
+    this.employeeForm.controls['cuadro'].setValue(value);
+  }
+
+  onSexoChange(event: Event, gender: string) {
+    const value = (event.target as HTMLInputElement).checked ? gender : '';
+    this.employeeForm.controls['sexo'].setValue(value);
   }
 
   send() {
     console.log('Servicio modificar empleado', this.employeeForm.value);
-    console.log('Empleado enviado', this.center);
+
+     const cuadroValue = Array.isArray(this.employeeForm.value.cuadro)
+       ? this.employeeForm.value.cuadro[0]
+       : this.employeeForm.value.cuadro;
+     const sexoValue = Array.isArray(this.employeeForm.value.sexo)
+       ? this.employeeForm.value.sexo[0]
+       : this.employeeForm.value.sexo;
+
+     // Actualizar los valores en el formulario
+     this.employeeForm.controls['cuadro'].setValue(cuadroValue);
+     this.employeeForm.controls['sexo'].setValue(sexoValue);
+
+     console.log('Servicio modificar empleado', this.employeeForm.value);
+     console.log('Empleado enviado', this.dataResive);
+
     if (this.employeeForm.valid) {
       const datosFormulario = { ...this.employeeForm.value };
       console.log(datosFormulario);
-       datosFormulario.sexo = this.maleChecked
-         ? 'M'
-         : this.femaleChecked
-         ? 'F'
-         : '';
-
-       console.log('Datos que se enviarán:', datosFormulario);
+      console.log('Datos que se enviarán:', datosFormulario);
       this.customerService.create(datosFormulario).subscribe({
         next: (response) => {
           console.log('Datos enviados correctamente:', response.status);

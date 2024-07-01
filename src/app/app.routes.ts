@@ -5,8 +5,6 @@ import { LoginComponent } from './module/login/login.component';
 import { EmployeeComponent } from './module/employee/employee.component';
 import { MedalsComponent } from './module/medals/medals.component';
 
-
-
 export const routes: Routes = [
   {
     path: '',

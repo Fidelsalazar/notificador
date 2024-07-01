@@ -14,19 +14,19 @@ import java.util.Date;
 public class MedalDTO {
 
   private Long id;
-  private Long medal;
-  private Long employee;
+  private String name;
   private String status;
   private Date fechaEntrega;
+  private Date fechaSolicitud;
 
   @Override
   public String toString() {
     return "MedalDTO{" +
       "id=" + id +
-      ", medal=" + medal +
-      ", employee=" + employee +
+      ", name='" + name + '\'' +
       ", status='" + status + '\'' +
       ", fechaEntrega=" + fechaEntrega +
+      ", fechaSolicitud=" + fechaSolicitud +
       '}';
   }
 }

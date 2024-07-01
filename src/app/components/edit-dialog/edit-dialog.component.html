@@ -152,5 +152,112 @@
   </div>
 </ng-template>
 
+<ng-template #newMedal>
+  <div class="card flex flex-column md:flex-row gap-3">
+    <form
+      [formGroup] = "employeeForm"
+      (ngSubmit)="send()"
+    >
+      <div >
+        <div>
 
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Condecoración
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Titulo de la condecoración"
+              formControlName="name"
+            />
+          </p-inputGroup>
+          <br/>
+
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Institución
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Institución que otorga la condecoración "
+              formControlName="institucion"
+            />
+          </p-inputGroup>
+          <br/>
+
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Tiempo de trabajo necesario
+            </p-inputGroupAddon>
+            <input
+              pInputText
+              placeholder="Carnet de Identidad"
+              formControlName="noCI"
+            />
+          </p-inputGroup>
+          <br/>
+
+
+
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              1er Apellido
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Primer Apellido"
+              formControlName="apellido1"
+            />
+          </p-inputGroup>
+          <br/>
+
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              2do Apellido
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Segundo Apellido"
+              formControlName="apellido2"
+            />
+          </p-inputGroup>
+        </div>
+      </div>
+
+    <div
+      class="card flex justify-content-center gap-3"
+      style="display: flex; flex-direction: row; flex-wrap: wrap;"
+    >
+      <div class="flex align-items-center">
+        <p-checkbox
+          formControlName="cuadro"
+          name="cuadro"
+          label="Es cuadro"
+          (change)="onCuadroChange($event)"
+        />
+      </div>
+
+      <div class="flex align-items-center">
+        <p-checkbox
+          formControlName="sexo"
+          label="Sexo Masculino"
+          name="sexo"
+          (change)="onSexoChange($event, 'M')"
+        />
+     </div>
+
+      <div class="flex align-items-center">
+        <p-checkbox
+          formControlName="sexo"
+          label="Sexo Femenino"
+          name="femenino"
+          (change)="onSexoChange($event, 'F')"
+        />
+      </div>
+    </div>
+
+      <br/>
+      <div class="card flex justify-content-center button">
+        <p-button label="Cancelar" severity="danger"  (onClick)="close()"/>
+        <p-button type="submit" label="Enviar" />
+      </div>
+    </form>
+  </div>
+</ng-template>
 

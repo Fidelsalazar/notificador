@@ -1,12 +1,17 @@
 package com.example.apistock.services.employee;
 
 import com.example.apistock.models.dto.EmployeeDTO;
+import com.example.apistock.models.dto.MedalDTO;
 import com.example.apistock.models.entities.Employee;
+import com.example.apistock.models.entities.EmployeeMedal;
 import com.example.apistock.repositories.EmployeeRepository;
 import com.example.apistock.repositories.MedalRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Hibernate;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -74,9 +79,34 @@ public class EmployeeServiceImpl implements EmployeeService {
   }
 
   @Override
-  public List<Employee> getAll() {
-    return employeeRepository.findAll();
+  public List<EmployeeDTO> getAll() {
+    List<Employee> employees = employeeRepository.findAll();
+    List<EmployeeDTO> employeeDTOs = new ArrayList<>();
+
+    for (Employee employee : employees) {
+      EmployeeDTO employeeDTO = new EmployeeDTO();
+      BeanUtils.copyProperties(employee, employeeDTO);
+
+      List<MedalDTO> medalDTOs = new ArrayList<>();
+      for (EmployeeMedal employeeMedal : employee.getEmployeeMedals()) {
+        Hibernate.initialize(employeeMedal);
+
+        MedalDTO medalDTO = new MedalDTO();
+        medalDTO.setId(employeeMedal.getId().getMedalId());
+        medalDTO.setName(employeeMedal.getMedal().getName()); // Copia el nombre de la medalla
+        medalDTO.setStatus(employeeMedal.getStatus());
+        medalDTO.setFechaEntrega(employeeMedal.getFechaEntrega());
+        medalDTO.setFechaEntrega(employeeMedal.getFechaSolicitud());
+
+        medalDTOs.add(medalDTO);
+      }
+
+      employeeDTO.setMedals(medalDTOs);
+      employeeDTOs.add(employeeDTO);
+    }
+    return employeeDTOs;
   }
+
 
   @Override
   public String delete(Long id) throws Exception {

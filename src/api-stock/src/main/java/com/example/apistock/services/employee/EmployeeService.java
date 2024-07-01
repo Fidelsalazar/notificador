@@ -8,7 +8,7 @@ import java.util.List;
 public interface EmployeeService {
   Employee save( EmployeeDTO employeeDTO );
 
-  List<Employee> getAll();
+  List<EmployeeDTO> getAll();
 
-    String delete(Long id) throws Exception;
+  String delete(Long id) throws Exception;
 }

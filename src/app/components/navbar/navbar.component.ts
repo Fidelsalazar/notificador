@@ -8,6 +8,9 @@ import { CommonModule } from '@angular/common';
 import { RippleModule } from 'primeng/ripple';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { AuthService } from '../../services/auth/auth.service';
+import { MenuSharingService } from '../../services/menu-sharing/menu-sharing.service';
+import { routes } from '../../app.routes';
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 
 @Component({
   selector: 'app-navbar',
@@ -20,25 +23,28 @@ import { AuthService } from '../../services/auth/auth.service';
     RippleModule,
     CommonModule,
     OverlayPanelModule,
+    BreadcrumbModule,
   ],
-  providers:[
-    AuthService
-  ],
+  providers: [AuthService],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
+
   items: MenuItem[] | undefined;
+  home: MenuItem | undefined;
 
   constructor(
-    private authService: AuthService
-  ){}
+    private authService: AuthService,
+    private menuSharingService: MenuSharingService
+  ) {}
 
   ngOnInit() {
     this.items = [
       {
         label: 'Home',
         icon: 'pi pi-home',
+        routerLink: '/dashboard',
       },
       {
         label: 'Condecoraciones',
@@ -52,7 +58,7 @@ export class NavbarComponent {
               {
                 label: 'Medalla José Tey',
                 shortcut: '(25 años)',
-                routerLink: '/medals'
+                routerLink: '/medals',
               },
               {
                 label: 'Orden Carlos J Finlay',
@@ -106,14 +112,14 @@ export class NavbarComponent {
           },
         ],
       },
-      {
+      /* {
         label: 'Planificación de guardia obrera',
         icon: 'pi pi-shield',
-      },
+      },*/
       {
         label: 'Trabajadores',
         icon: 'pi pi-users',
-        routerLink: '/employer'
+        routerLink: '/employer',
       },
       {
         separator: true,
@@ -126,7 +132,12 @@ export class NavbarComponent {
     ];
   }
 
-  close(){
+  onMenuItemClick(itemLabel: string) {
+    console.log(itemLabel);
+    this.menuSharingService.changeMenuItem(itemLabel);
+  }
+
+  close() {
     this.authService.logout();
   }
 }
