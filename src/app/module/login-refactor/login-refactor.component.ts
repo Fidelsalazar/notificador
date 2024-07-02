@@ -15,8 +15,9 @@ import { AuthService } from '../../services/auth/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
+
 @Component({
-  selector: 'app-login',
+  selector: 'app-login-refactor',
   standalone: true,
   imports: [
     RouterModule,
@@ -30,10 +31,10 @@ import { Subscription } from 'rxjs';
     ReactiveFormsModule,
   ],
   providers: [AuthService],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: './login-refactor.component.html',
+  styleUrl: './login-refactor.component.css'
 })
-export class LoginComponent {
+export class LoginRefactorComponent {
   private subscription: Subscription = new Subscription();
 
   loginForm: FormGroup;
@@ -54,7 +55,7 @@ export class LoginComponent {
 
   ngOnInit() {
     this.authService.isLoggedIn().subscribe((loggedInStatus) => {
-      this.isLogged = true;
+      this.isLogged = loggedInStatus;
     });
   }
 

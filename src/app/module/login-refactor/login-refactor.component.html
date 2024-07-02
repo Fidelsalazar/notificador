@@ -1,5 +1,5 @@
 <div
-  class="continer "
+  class=""
   *ngIf="authService.isLoggedIn()"
 >
   <div class="continer-raw">
@@ -9,7 +9,7 @@
           <div class="flex flex-wrap justify-center items-center gap-2">
             <br/>
             <input
-              id="username"
+              pInputText id="username"
               formControlName="username"
               class="w-12rem"
               placeholder="Usuario"
@@ -19,7 +19,7 @@
           <br/>
           <div class="flex flex-wrap justify-center items-center gap-2">
             <input
-              
+              pInputText
               type="password"
               id="password"
               formControlName="password"
@@ -63,4 +63,5 @@
   </div>
 </div>
 
-<div class="background-image"></div>
+<div class="continer background-image"></div>
+
