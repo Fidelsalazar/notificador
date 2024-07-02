@@ -26,4 +26,17 @@ p-button{
   margin-top: 55px;
 }
 
+.input-full-width {
+  display: flex;
+  flex-direction: column;
+}
 
+.input-full-width input {
+  width: 100%;
+  /* Asegura que el input ocupe todo el ancho disponible */
+}
+
+.input-full-width mat-hint {
+  width: 100%;
+  /* Asegura que el hint ocupe todo el ancho disponible y se muestre debajo del input */
+}

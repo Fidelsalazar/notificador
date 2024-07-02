@@ -32,7 +32,8 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { MedalsService } from '../../services/medal/medals.service'
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { CalendarModule } from 'primeng/calendar';
-import { from } from 'rxjs';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { CheckboxModule } from 'primeng/checkbox';
 
 @Component({
@@ -52,6 +53,8 @@ import { CheckboxModule } from 'primeng/checkbox';
     ScrollTopModule,
     CalendarModule,
     CheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [CustomerService, MedalsService],
   templateUrl: './edit-dialog.component.html',
@@ -125,16 +128,16 @@ export class EditDialogComponent implements OnInit {
 
   initFormEmployee() {
     this.employeeForm = this.fb.group({
-      fechaEntrada: [''],
-      fechaEntradEdu: [''],
-      fechaEntradaCNEA: [''],
-      idEmpleado: [''],
-      noCI: [''],
-      nombre: [''],
-      apellido1: [''],
-      apellido2: [''],
+      fechaEntrada: ['', [Validators.required]],
+      fechaEntradEdu: ['', [Validators.required]],
+      fechaEntradaCNEA: ['', [Validators.required]],
+      idEmpleado: ['', [Validators.required, Validators.minLength(4)]],
+      noCI: ['', [Validators.required, Validators.pattern('\\d{11}')]],
+      nombre: ['', [Validators.required, Validators.maxLength(50)]],
+      apellido1: ['', [Validators.required, Validators.maxLength(50)]],
+      apellido2: ['', [Validators.maxLength(50)]],
       cuadro: [''],
-      sexo: [''],
+      sexo: ['', [Validators.required]],
     });
   }
 
@@ -151,19 +154,19 @@ export class EditDialogComponent implements OnInit {
   send() {
     console.log('Servicio modificar empleado', this.employeeForm.value);
 
-     const cuadroValue = Array.isArray(this.employeeForm.value.cuadro)
-       ? this.employeeForm.value.cuadro[0]
-       : this.employeeForm.value.cuadro;
-     const sexoValue = Array.isArray(this.employeeForm.value.sexo)
-       ? this.employeeForm.value.sexo[0]
-       : this.employeeForm.value.sexo;
+    const cuadroValue = Array.isArray(this.employeeForm.value.cuadro)
+      ? this.employeeForm.value.cuadro[0]
+      : this.employeeForm.value.cuadro;
+    const sexoValue = Array.isArray(this.employeeForm.value.sexo)
+      ? this.employeeForm.value.sexo[0]
+      : this.employeeForm.value.sexo;
 
-     // Actualizar los valores en el formulario
-     this.employeeForm.controls['cuadro'].setValue(cuadroValue);
-     this.employeeForm.controls['sexo'].setValue(sexoValue);
+    // Actualizar los valores en el formulario
+    this.employeeForm.controls['cuadro'].setValue(cuadroValue);
+    this.employeeForm.controls['sexo'].setValue(sexoValue);
 
-     console.log('Servicio modificar empleado', this.employeeForm.value);
-     console.log('Empleado enviado', this.dataResive);
+    console.log('Servicio modificar empleado', this.employeeForm.value);
+    console.log('Empleado enviado', this.dataResive);
 
     if (this.employeeForm.valid) {
       const datosFormulario = { ...this.employeeForm.value };

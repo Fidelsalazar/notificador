@@ -22,6 +22,9 @@
               [showIcon]="true"
             ></p-calendar>
           </p-inputGroup>
+          <mat-hint *ngIf="employeeForm.get('fechaEntrada')?.invalid && employeeForm.get('fechaEntrada')?.touched">
+            <span *ngIf="employeeForm.get('fechaEntrada')?.hasError('required')">Este campo es requerido.</span>
+          </mat-hint>
           <br/>
 
           <p-inputGroup>
@@ -34,6 +37,9 @@
               [showIcon]="true"
             ></p-calendar>
           </p-inputGroup>
+          <mat-hint *ngIf="employeeForm.get('fechaEntradEdu')?.invalid && employeeForm.get('fechaEntradEdu')?.touched">
+            <span *ngIf="employeeForm.get('fechaEntradEdu')?.hasError('required')">Este campo es requerido.</span>
+          </mat-hint>
           <br/>
 
           <p-inputGroup>
@@ -46,17 +52,22 @@
               [showIcon]="true"
             ></p-calendar>
           </p-inputGroup>
+          <mat-hint *ngIf="employeeForm.get('fechaEntradaCNEA')?.invalid && employeeForm.get('fechaEntradaCNEA')?.touched">
+            <span *ngIf="employeeForm.get('fechaEntradaCNEA')?.hasError('required')">Este campo es requerido.</span>
+          </mat-hint>
           <br/>
 
           <p-inputGroup>
-            <p-inputGroupAddon>
-              ID Empleado
-            </p-inputGroupAddon>
-            <input
-              pInputText placeholder="ID Empleado"
-              formControlName="idEmpleado"
-            />
+          <p-inputGroupAddon>
+            ID Empleado
+          </p-inputGroupAddon>
+            <input pInputText placeholder="ID Empleado" formControlName="idEmpleado" />
           </p-inputGroup>
+
+          <mat-hint *ngIf="employeeForm.get('idEmpleado')?.invalid && employeeForm.get('idEmpleado')?.touched">
+                <span *ngIf="employeeForm.get('idEmpleado')?.hasError('required')">Este campo es requerido.</span>
+                <span *ngIf="employeeForm.get('idEmpleado')?.hasError('minLength')">El ID debe tener al menos 4 caracteres.</span>
+          </mat-hint>
           <br/>
         </div>
 
@@ -70,6 +81,10 @@
               formControlName="noCI"
             />
           </p-inputGroup>
+          <mat-hint *ngIf="employeeForm.get('noCI')?.invalid && employeeForm.get('noCI')?.touched">
+                <span *ngIf="employeeForm.get('noCI')?.hasError('required')">Este campo es requerido.</span>
+                <span *ngIf="employeeForm.get('noCI')?.hasError('pattern')">El CI debe tener 11 caracteres numéricos.</span>
+          </mat-hint>
           <br/>
 
           <p-inputGroup>
@@ -81,6 +96,10 @@
               formControlName="nombre"
             />
           </p-inputGroup>
+          <mat-hint *ngIf="employeeForm.get('nombre')?.invalid && employeeForm.get('nombre')?.touched">
+                <span *ngIf="employeeForm.get('nombre')?.hasError('required')">Este campo es requerido.</span>
+                <span *ngIf="employeeForm.get('nombre')?.hasError('maxLength')">El nombre no debe tenr mas de 50 caracteres.</span>
+          </mat-hint>
           <br/>
 
           <p-inputGroup>
@@ -92,6 +111,10 @@
               formControlName="apellido1"
             />
           </p-inputGroup>
+          <mat-hint *ngIf="employeeForm.get('apellido1')?.invalid && employeeForm.get('apellido1')?.touched">
+                <span *ngIf="employeeForm.get('apellido1')?.hasError('required')">Este campo es requerido.</span>
+                <span *ngIf="employeeForm.get('apellido1')?.hasError('maxLength')">El nombre no debe tenr más de 50 caracteres.</span>
+          </mat-hint>
           <br/>
 
           <p-inputGroup>
@@ -103,6 +126,10 @@
               formControlName="apellido2"
             />
           </p-inputGroup>
+          <mat-hint *ngIf="employeeForm.get('apellido2')?.invalid && employeeForm.get('apellido2')?.touched">
+                <span *ngIf="employeeForm.get('apellido2')?.hasError('required')">Este campo es requerido.</span>
+                <span *ngIf="employeeForm.get('apellido2')?.hasError('maxLength')">El nombre no debe tenr más de 50 caracteres.</span>
+          </mat-hint>
         </div>
       </div>
 
@@ -140,6 +167,10 @@
           [disabled]="maleChecked">
         </p-checkbox>
       </div>
+
+      <mat-hint *ngIf="employeeForm.get('sexo')?.invalid && employeeForm.get('sexo')?.touched">
+        <span *ngIf="employeeForm.get('sexo')?.hasError('required')">El sexo es un campo requerido.</span>
+      </mat-hint>
 
     </div>
 
